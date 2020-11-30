@@ -19,12 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="85c2ae04-5162-4ab0-a255-70c280c8992f" name="Default Changelist" comment="feat: 系统设计还需要加强">
-      <change afterPath="$PROJECT_DIR$/blogs/frontend/puml.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uml/test.puml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uml/usecase.puml" afterDir="false" />
+    <list default="true" id="85c2ae04-5162-4ab0-a255-70c280c8992f" name="Default Changelist" comment="feat: 需求小计">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public" beforeDir="false" afterPath="$PROJECT_DIR$/public" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uml/usecase.puml" beforeDir="false" afterPath="$PROJECT_DIR$/uml/usecase.puml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +114,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: 系统设计还需要加强 Todo" />
     <MESSAGE value="feat: 系统设计还需要加强" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 系统设计还需要加强" />
+    <MESSAGE value="feat: 需求小计" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 需求小计" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-1496" y="202" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605688405258">
@@ -212,10 +210,11 @@
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state x="-1451" y="179" key="SettingsEditor/1680.0.1920.1080/0.0.1680.1050/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1606039921826" />
-    <state x="470" y="115" width="740" height="819" key="find.popup" timestamp="1604287679832">
-      <screen x="0" y="0" width="1680" height="1050" />
+    <state x="2217" y="118" width="846" height="843" key="find.popup" timestamp="1606720095340">
+      <screen x="1680" y="0" width="1920" height="1080" />
     </state>
     <state x="470" y="115" width="740" height="819" key="find.popup/0.0.1680.1050/-1920.0.1920.1080/1680.0.1920.1080@0.0.1680.1050" timestamp="1604287679832" />
+    <state x="2217" y="118" width="846" height="843" key="find.popup/1680.0.1920.1080/0.0.1680.1050/-1920.0.1920.1080@1680.0.1920.1080" timestamp="1606720095340" />
     <state x="-1295" y="241" width="670" height="676" key="search.everywhere.popup" timestamp="1605680354752">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
