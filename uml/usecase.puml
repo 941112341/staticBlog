@@ -87,7 +87,7 @@ package Front {
         (dsl)
     }
     (自动生成配置) -> CustomComponent
-
+    (白名单)
 }
 
 
