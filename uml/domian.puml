@@ -1,56 +1,75 @@
 @startuml
 
+:Developer:
+:用户: as user
+:Admin:
+
+(应用) as app
+(模板) as template
+(可见性) as visible
+(流程) as workflow
+
+note right of visible
+    可见性收到 (版本控制,权限,灰度)影响
+end note
 
 
-package Form {
+user -- visible
 
-    (事件总线) as eventbus
+Admin --> visible: 设置可见性
+
+visible --> app: 选择应用
+visible --> template: 选择模板
+visible ---> workflow: 列出自建流程
+
+template --> workflow: 补足参数
+
+app --> (trigger): contains
+app --> (action)
+
+Developer ---> app: 定义
+
+rectangle form {
+
+    (auth)
+    (dynamic data)
+    (check)
+    (variable:dsl)
 }
 
+(Node)
 
-package Event {
+trigger --> (Node)
+action --> (Node)
 
-    (事件定义) as eventDef
+Node --> form
+Node -> workflow: many to one
 
-    (自定义事件定义) --|> eventDef
-    (官方预定义事件) --|> eventDef
+:用户: --> form
+:用户: --> (authAccount)
 
-    (事件) as event
+authAccount -> authAccount:定时刷新
+
+authAccount <-- auth
+
+workflow --> 流程引擎
+
+'流程引擎 -> Node: callback
+newpage
+
+package Auth {
+  (是否是管理员)
 }
 
-package Component {
-    /'
-    我们提供base component， 用户可基于这一套base component config 甚至更底层构建一套component
-    这一套component应该是响应式的，组件内的逻辑是封闭的，以sheet为例
-    '/
-    (基础组件库) as (single)
-    (属性) as property
-    (组合多个基础组件) as collect
-    (方法) as function
+package visible {
 
-    note right of function
-        需要设计一套支持
-        用户定义收到event
-        进行函数处理的config/dsl
-    end note
-
-    collect --|> (single): one to many
-
-
-    (single) --> property: 对外暴露
-    (single) --> function
-
-    property --> (校验)
-    property --> (默认值)
-
-    eventbus <--> event: dispatch event
-
-    function <--> event: send event
-
-
-
+   (app可见性)
+   (trigger/action可见性)
+   (returns 可见性)
 }
 
-
+package App {
+    (listAppService)
+}
 
 @enduml

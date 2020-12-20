@@ -1,143 +1,53 @@
 @startuml
 
+rectangle submit {
+   (选择触发器/执行器) as node
+   (选择应用) as app
+   (填写表单) as form
 
-    rectangle Runtime {
-         usecase (应用监控) as appMonitor
-         usecase (异常处理) as exceptionHandler
-         usecase (日志处理) as log
-         usecase (面向用户的报警) as alarm /'尝试抽象出来，不一定是这个domain里'/
-
-         package DataChart {
-            usecase (折线图) as lineChart
-'           todo more chart
-         }
-         appMonitor --> DataChart
-
-         package ExceptionHandler {
-            usecase (重试队列) as retryQueue
-            usecase (错误信息) as errorMessage
-
-            note bottom of retryQueue: 用户可见的重试
-            note bottom of errorMessage: 类似保存堆栈信息
-         }
-         exceptionHandler --> ExceptionHandler
-
-         package Log {
-            (运行链路)
-            (出入参数)
-            (报错位置)
-            (版本号)
-         }
-         log --> Log
-'         note right of Log: 快照
-
-         package System {
-            (频控控制)
-            (系统运行流程限制)
-            (压测 -- 内存/cpu)
-
-         }
-
-         /'是否支持顺序/事务/回滚'/
-         rectangle Other {
-
-            (transaction) -> (isolation)
-            (isolation) -> (lock)
-
-            note bottom of lock
-                希望交流是通过mq来交互
-                因为通过mq可以轻松的实现延迟
-                效果以及可以可视化的从某个node开始
-                重试
-            end note
-
-            (rollback) -down-> (do cancel)
-            (priority) -down-> (高优先级先完成) /'使用rocketmq 的消息优先级实现 todo'/
-            (refer)
-            (order) /'使用rocketmq 顺序消息？'/
-
-            note bottom of refer
-                飞流应该提供兜底的循环引用检测
-                最简单的方法是：提供一个创建前Test 功能，
-                如果this Test 触发次数 > 1 就是循环引用
-            end note
-         }
-
-         package Trigger {
-           (register -> webhook) as info
-           note right of info
-                从info 迁移到稳定存储结构
-                需要info可追溯，可重构，可检查
-           end note
-         }
-    }
-
-'note top of Runtime
-'    三方/1方应用接口是否能够用到引擎的接口，以实现一些列增强功能，如lock/isolution i
-'end note
-
-newpage
-
-note "前端侧" as front
-
-package Front {
-    package CustomComponent {
-        (version)
-        (国际化)
-        (dsl)
-    }
-    (自动生成配置) -> CustomComponent
-    (白名单)
+   (授权/取消授权) as auth
+   (表单校验) as formCheck
+   (注册触发器)
 }
 
+ rectangle flowManagement {
+    (查看流程)
+    (启动流程)
+    (触发流程)
+    (删除流程)
+    (停用流程)
+ }
 
-newpage
+user --> submit
+user --> flowManagement
+user --> (查看模板)
+user --> (拷贝工作流)
+user --> (查看流程日志)
 
-package FlowLifecycle {
+应用 --> (触发流程)
 
-    (plugin)
-
-    note bottom of plugin
-        能否通过类似插件的方式管理起生命周期，比如rpc plugin专门调用外部应用
-        spi接口， 一些plugin专门用来管理serviceMesh等等,一部分专门管理
-        db flow 状态等等
-    end note
-
-    (beforeCreate) ->  (creating)
-     (creating) -> (afterCreate)
-
-    (afterCreate) -down-> (beforeDelete)
-    (beforeDelete) -left-> (deleting)
-    (deleting) -left-> (afterDelete)
-
-   (afterDelete) -down-> (beforeActive)
-   (beforeActive) -> (active)
-    (active) -> (afterActive)
-
-    (afterActive) -down-> (beforeTriggerFlow)
-   (beforeTriggerFlow) -left-> (triggerFlow)
-
-rectangle for {
-    (triggerFlow) -down-> (beforeTriggerNode)
-    (beforeTriggerNode) -> (triggerNode)
-    (triggerNode) -> (afterTriggerNode)
-}
-     (afterTriggerNode) -down-> (afterTriggerFlow)
-
+rectangle appManagement {
+    (停用/启用app)
+    (查看使用量)
 }
 
+rectangle templateManagement {
+    (配置模板列表)
+    (配置模板项)
+    (配置模板组)
+}
 
-note right of FlowLifecycle
-    可以在Test进行长耗时操作，如果是一方应用应该提供Test方法
-    不提供的情况下会调用do，prepare使用同步的
-    对于trigger的情况需要提供Mock方法，方法不提供的情况
-    下，使用占位符发送event到MQ（eventBus）中
+admin --> appManagement
+admin --> templateManagement
 
-    即Test方法包括了 一次 创建 & 激活 & 一次触发 & 关闭激活
-    创建只是将状态进行更改，改为激活 & 用户可见
-    与老引擎完全解偶
+rectangle customApp {
+    (定义表单组件)
+    (定义组件间关系)
+    (定义授权)
+    (定义触发器/执行器元数据)
+    (定义应用元数据)
+}
 
-   (同时支持用户手动触发工作流)
-end note
+developer -right-> customApp
 
 @enduml

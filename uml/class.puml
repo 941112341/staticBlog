@@ -1,0 +1,37 @@
+@startuml
+
+
+class User {
+    larkId: string
+    tenantId: int64
+
+}
+
+package visible {
+    interface resource {
+        GetType(): string
+        GetID(): string
+    }
+
+    interface VisibleServiceFactory {
+        New(resourceType: string): VisibleService
+    }
+
+    VisibleServiceFactory ..> resource
+    VisibleServiceFactory ..> VisibleService
+
+    interface VisibleService {
+        IsVisible(resource, user): (bool, error)
+        Filters(resources []resource, user): ([]resource, error)
+    }
+
+    class VisibleServiceChain {
+        filters []VisibleService
+    }
+
+    VisibleServiceChain -up-|> VisibleService
+
+
+}
+
+@enduml

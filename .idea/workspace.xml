@@ -19,9 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="85c2ae04-5162-4ab0-a255-70c280c8992f" name="Default Changelist" comment="feat: 捷径usecase整理">
-      <change afterPath="$PROJECT_DIR$/uml/domian.puml" afterDir="false" />
+    <list default="true" id="85c2ae04-5162-4ab0-a255-70c280c8992f" name="Default Changelist" comment="feat: 捷径domain整理1">
+      <change afterPath="$PROJECT_DIR$/uml/class.puml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uml/domian.puml" beforeDir="false" afterPath="$PROJECT_DIR$/uml/domian.puml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uml/usecase.puml" beforeDir="false" afterPath="$PROJECT_DIR$/uml/usecase.puml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -117,6 +118,7 @@
     <MESSAGE value="feat: 系统设计还需要加强" />
     <MESSAGE value="feat: 需求小计" />
     <MESSAGE value="feat: 捷径usecase整理" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 捷径usecase整理" />
+    <MESSAGE value="feat: 捷径domain整理1" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 捷径domain整理1" />
   </component>
 </project>
